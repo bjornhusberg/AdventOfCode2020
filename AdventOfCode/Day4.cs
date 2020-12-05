@@ -6,18 +6,18 @@ namespace AdventOfCode
 {
     public class Day4 : Day
     {
-        public override void Part1()
+        public object Part1()
         {
-            PrintResult(File.ReadAllText("input4.txt")
+            return File.ReadAllText("input4.txt")
                 .Split("\n\n")
                 .Select(p => p.Split("\n").SelectMany(s => s.Split(" ")))
                 .Count(p => new[]
                 {
                     "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"
-                }.All(header => p.Any(row => row.StartsWith(header + ":")))));
+                }.All(header => p.Any(row => row.StartsWith(header + ":"))));
         }
 
-        public override void Part2()
+        public object Part2()
         {
             var rules = new[]
             {
@@ -30,11 +30,11 @@ namespace AdventOfCode
                 "pid:[0-9]{9}"
             }.Select(r => new Regex(r));
             
-            PrintResult(File.ReadAllText("input4.txt")
+            return File.ReadAllText("input4.txt")
                 .Split("\n\n")
                 .Select(p => p.Split("\n").SelectMany(s => s.Split(" ")))
                 .Count(p => p.All(l => l.StartsWith("cid:") || rules.Any(regex => regex.IsMatch(l))) 
-                            && rules.All(regex => p.Any(regex.IsMatch))));
+                            && rules.All(regex => p.Any(regex.IsMatch)));
         }
     }
 }

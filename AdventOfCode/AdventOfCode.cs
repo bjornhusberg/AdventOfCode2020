@@ -1,31 +1,30 @@
 
+using System;
+using System.Linq;
+using System.Reflection;
+
 namespace AdventOfCode
 {
-    public abstract class Day
+    public interface Day
     {
-        public abstract void Part1();
-        public abstract void Part2();
-        
-        protected void PrintResult(object result)
-        {
-            System.Console.WriteLine(GetType().Name + ": " + result);
-        }
+        public object Part1();
+        public object Part2();
     }
     
     public static class AdventOfCode
     {
         public static void Main()
         {
-            foreach (var day in new Day[]
+            var days = Assembly.GetExecutingAssembly()
+                .GetTypes()
+                .Where(type => type != typeof(Day) && typeof(Day).IsAssignableFrom(type))
+                .OrderBy(type => type.Name);
+
+            foreach (var day in days)
             {
-                new Day1(), 
-                new Day2(),
-                new Day3(),
-                new Day4()
-            })
-            {
-                day.Part1();
-                day.Part2();
+                var dayObject = (Day) day.GetConstructor(new Type[0])?.Invoke(new object[0]);
+                Console.WriteLine(day.Name + " part 1: " + dayObject.Part1());
+                Console.WriteLine(day.Name + " part 2: " + dayObject.Part2());
             }
         }
     }
