@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace AdventOfCode
 {
-    public interface Day
+    public interface IDay
     {
         public object Part1();
         public object Part2();
@@ -17,12 +17,12 @@ namespace AdventOfCode
         {
             var days = Assembly.GetExecutingAssembly()
                 .GetTypes()
-                .Where(type => type != typeof(Day) && typeof(Day).IsAssignableFrom(type))
+                .Where(type => type != typeof(IDay) && typeof(IDay).IsAssignableFrom(type))
                 .OrderBy(type => type.Name);
 
             foreach (var day in days)
             {
-                var dayObject = (Day) day.GetConstructor(new Type[0])?.Invoke(new object[0]);
+                var dayObject = (IDay) day.GetConstructor(new Type[0])?.Invoke(new object[0]);
                 Console.WriteLine(day.Name + " part 1: " + dayObject.Part1());
                 Console.WriteLine(day.Name + " part 2: " + dayObject.Part2());
             }

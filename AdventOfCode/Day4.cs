@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace AdventOfCode
 {
-    public class Day4 : Day
+    public class Day4 : IDay
     {
         public object Part1()
         {

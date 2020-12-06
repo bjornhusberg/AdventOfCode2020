@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace AdventOfCode
 {
-    public class Day2 : Day
+    public class Day2 : IDay
     {
         public object Part1()
         {
