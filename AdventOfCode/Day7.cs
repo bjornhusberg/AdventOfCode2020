@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 
 namespace AdventOfCode
 {
@@ -9,7 +10,7 @@ namespace AdventOfCode
     {
         public object Part1()
         {
-            return File.ReadAllText("input6.txt")
+            File.ReadAllText("input6.txt")
                 .Split("\n\n")
                 .Select(group => group.ToCharArray().Where(ch => ch >= 'a' && ch <= 'z').Distinct().Count())
                 .Sum();
