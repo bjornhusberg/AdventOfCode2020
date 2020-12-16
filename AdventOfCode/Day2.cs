@@ -6,33 +6,24 @@ namespace AdventOfCode
 {
     public class Day2 : IDay
     {
-        public object Part1()
-        {
-            return File.ReadLines("input2.txt")
-                .Count(line =>
-                    {
-                        var match = new Regex("^(\\d*)-(\\d*) (\\w): (\\w*)$").Match(line);
-                        var from = int.Parse(match.Groups[1].Captures[0].Value);
-                        var to = int.Parse(match.Groups[2].Captures[0].Value);
-                        var ch = char.Parse(match.Groups[3].Captures[0].Value);
-                        var str = match.Groups[4].Captures[0].Value;
-                        var count = str.Count(c => c == ch);
-                        return from <= count && count <= to;
-                    });
-        }
+        [ExpectedResult("465")]
+        public object Part1() => File.ReadLines("input2.txt")
+            .Select(line => new Regex("^(\\d*)-(\\d*) (\\w): (\\w*)$").Match(line))
+            .Select(match => (
+                from: int.Parse(match.Groups[1].Captures[0].Value),
+                to: int.Parse(match.Groups[2].Captures[0].Value),
+                count: match.Groups[4].Captures[0].Value.Count(c => 
+                    c == char.Parse(match.Groups[3].Captures[0].Value))))
+            .Count(v => v.from <= v.count && v.count <= v.to);
 
-        public object Part2()
-        {
-            return File.ReadLines("input2.txt")
-                .Count(line =>
-                {
-                    var match = new Regex("^(\\d*)-(\\d*) (\\w): (\\w*)$").Match(line);
-                    var from = int.Parse(match.Groups[1].Captures[0].Value);
-                    var to = int.Parse(match.Groups[2].Captures[0].Value);
-                    var ch = char.Parse(match.Groups[3].Captures[0].Value);
-                    var str = match.Groups[4].Captures[0].Value;
-                    return str[from - 1] == ch ^ str[to - 1] == ch;
-                });
-        }
+        [ExpectedResult("294")]
+        public object Part2() => File.ReadLines("input2.txt")
+            .Select(line => new Regex("^(\\d*)-(\\d*) (\\w): (\\w*)$").Match(line))
+            .Select(match => (
+                from: int.Parse(match.Groups[1].Captures[0].Value),
+                to: int.Parse(match.Groups[2].Captures[0].Value),
+                ch: char.Parse(match.Groups[3].Captures[0].Value),
+                str: match.Groups[4].Captures[0].Value))
+            .Count(v => v.str[v.from - 1] == v.ch ^ v.str[v.to - 1] == v.ch);
     }
 }
