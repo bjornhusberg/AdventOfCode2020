@@ -1,12 +1,11 @@
 ﻿using System.IO;
 using System.Linq;
-using Microsoft.AspNetCore.Authentication;
 
 namespace AdventOfCode
 {
     public class Day1 : IDay
     {
-        [ExpectedResult("440979")]
+        [ExpectedResult(440979)]
         public object Part1()
         {
             // TODO: Linqify
@@ -17,7 +16,7 @@ namespace AdventOfCode
             return null;
         }
 
-        [ExpectedResult("82498112")]
+        [ExpectedResult(82498112)]
         public object Part2()
         {
             // TODO: Linqify

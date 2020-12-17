@@ -21,6 +21,6 @@ namespace AdventOfCode
                     })));
 
         private static string PrintResult(IDay day, string method, object result) =>
-            $"{day.GetType().Name}.{method}: {result} ({ExpectedResult.GetExpectedResult(day, method) == result.ToString()})";
+            $"{day.GetType().Name}.{method}: {result} ({result.Equals(ExpectedResult.GetExpectedResult(day, method))})";
     }
 }

@@ -6,7 +6,7 @@ namespace AdventOfCode
 {
     public class Day4 : IDay
     {
-        [ExpectedResult("264")]
+        [ExpectedResult(264)]
         public object Part1() => File.ReadAllText("input4.txt")
             .Split("\n\n")
             .Select(p => p.Split("\n").SelectMany(s => s.Split(" ")))
@@ -15,7 +15,7 @@ namespace AdventOfCode
                 "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"
             }.All(header => p.Any(row => row.StartsWith($"{header}:"))));
 
-        [ExpectedResult("224")]
+        [ExpectedResult(224)]
         public object Part2() => File.ReadAllText("input4.txt")
             .Split("\n\n")
             .Select(p => p.Split("\n").SelectMany(s => s.Split(" ")))

@@ -5,14 +5,14 @@ namespace AdventOfCode
 {
     public class ExpectedResult : Attribute
     {
-        private readonly string _result;
+        private readonly object _result;
 
-        public ExpectedResult(string result)
+        public ExpectedResult(object result)
         {
             _result = result;
         }
 
-        public static string GetExpectedResult(object o, string methodName) =>
+        public static object GetExpectedResult(object o, string methodName) =>
             ((ExpectedResult) o.GetType().GetMethod(methodName)?
                 .GetCustomAttribute(typeof(ExpectedResult)))?._result;
     }

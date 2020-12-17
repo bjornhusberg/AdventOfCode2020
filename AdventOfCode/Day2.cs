@@ -6,7 +6,7 @@ namespace AdventOfCode
 {
     public class Day2 : IDay
     {
-        [ExpectedResult("465")]
+        [ExpectedResult(465)]
         public object Part1() => File.ReadLines("input2.txt")
             .Select(line => new Regex("^(\\d*)-(\\d*) (\\w): (\\w*)$").Match(line))
             .Select(match => (
@@ -16,7 +16,7 @@ namespace AdventOfCode
                     c == char.Parse(match.Groups[3].Captures[0].Value))))
             .Count(v => v.from <= v.count && v.count <= v.to);
 
-        [ExpectedResult("294")]
+        [ExpectedResult(294)]
         public object Part2() => File.ReadLines("input2.txt")
             .Select(line => new Regex("^(\\d*)-(\\d*) (\\w): (\\w*)$").Match(line))
             .Select(match => (
